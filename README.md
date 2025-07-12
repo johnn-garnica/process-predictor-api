@@ -96,7 +96,6 @@ Modulo 6 - API modelo ML/
 │   ├── __init__.py
 │   └── models.py               # Carga del modelo LightGBM
 ├── .gitignore                  # Archivos ignorados por Git
-├── docker-compose.yml          # Orquestación de servicios
 ├── Dockerfile                  # Imagen de la API
 ├── main.py                     # Aplicación principal FastAPI
 ├── model.pkl                   # Modelo ML pre-entrenado
