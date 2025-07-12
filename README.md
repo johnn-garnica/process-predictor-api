@@ -63,10 +63,10 @@ Esta API REST desarrollada con FastAPI permite predecir si un proceso del sistem
   ```json
   {
     "Uso_CPU": 0.75,
-    "Uso_Memoria": 0.60,
-    "Numero_Hilos": 4.0,
-    "Tiempo_Ejecucion": 120.5,
-    "Numero_Errores": 2.0,
+    "Uso_Memoria": 1.0,
+    "Numero_Hilos": 1.0,
+    "Tiempo_Ejecucion": 1.5,
+    "Numero_Errores": 4.0,
     "Aplicación": true,
     "Servicio": false,
     "Sistema": false
