@@ -79,6 +79,19 @@ Esta API REST desarrollada con FastAPI permite predecir si un proceso del sistem
 
 ### Actualización y Eliminación
 - **PUT** `/predict/{id}` - Actualizar predicción existente
+  ```json
+  {
+    "Uso_CPU": 0.75,
+    "Uso_Memoria": 1.0,
+    "Numero_Hilos": 1.0,
+    "Tiempo_Ejecucion": 1.5,
+    "Numero_Errores": 4.0,
+    "Aplicación": true,
+    "Servicio": false,
+    "Sistema": false
+  }
+  ```
+  **Nota**: debe usarse prediction={value} como query parameter (valores 1 o 0).
 - **DELETE** `/delete/{id}` - Eliminar predicción
 
 ### Documentación
