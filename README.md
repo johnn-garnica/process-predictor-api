@@ -46,7 +46,7 @@ Esta API REST desarrollada con FastAPI permite predecir si un proceso del sistem
     Aplicacion BOOLEAN,
     Servicio BOOLEAN,
     Sistema BOOLEAN,
-    pred TEXT
+    pred INTEGER
    );
    ```
 
@@ -65,8 +65,8 @@ Esta API REST desarrollada con FastAPI permite predecir si un proceso del sistem
     "Uso_CPU": 0.75,
     "Uso_Memoria": 1.0,
     "Numero_Hilos": 1.0,
-    "Tiempo_Ejecucion": 1.5,
-    "Numero_Errores": 4.0,
+    "Tiempo_Ejecucion": 0.25,
+    "Numero_Errores": 1.0,
     "Aplicación": true,
     "Servicio": false,
     "Sistema": false
@@ -84,8 +84,8 @@ Esta API REST desarrollada con FastAPI permite predecir si un proceso del sistem
     "Uso_CPU": 0.75,
     "Uso_Memoria": 1.0,
     "Numero_Hilos": 1.0,
-    "Tiempo_Ejecucion": 1.5,
-    "Numero_Errores": 4.0,
+    "Tiempo_Ejecucion": 0.25,
+    "Numero_Errores": 1.0,
     "Aplicación": true,
     "Servicio": false,
     "Sistema": false
@@ -131,7 +131,7 @@ La tabla `predictions` contiene:
 | Aplicacion | BOOLEAN | Si es proceso de aplicación |
 | Servicio | BOOLEAN | Si es proceso de servicio |
 | Sistema | BOOLEAN | Si es proceso del sistema |
-| pred | TEXT | Resultado: "Proceso problemático" o "Proceso no problemático" |
+| pred | INTEGER | Resultado: 0 o 1 |
 
 ## 🔧 Tecnologías Utilizadas
 
@@ -145,11 +145,11 @@ La tabla `predictions` contiene:
 ## 📊 Rangos de Datos del Modelo
 
 El modelo espera valores en los siguientes rangos:
-- **Uso_CPU**: (-1.7337, 1.7314)
-- **Uso_Memoria**: (-1.7312, 1.7348)
-- **Numero_Hilos**: (-1.6983, 1.6939)
-- **Tiempo_Ejecucion**: (-1.7324, 1.7329)
-- **Numero_Errores**: (-2.2367, 6.2568)
+- **Uso_CPU**: (0, 1)
+- **Uso_Memoria**: (0, 1)
+- **Numero_Hilos**: (0, 1)
+- **Tiempo_Ejecucion**: (0, 1)
+- **Numero_Errores**: (0, 1)
 - **Aplicación, Servicio, Sistema**: Boolean (True/False)
 
 ## 🛠️ Configuración

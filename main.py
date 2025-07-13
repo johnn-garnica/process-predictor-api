@@ -4,7 +4,7 @@ import os
 from controllers.prediction_controles import Pred
 from models.models import ml_model
 
-p_meaning = {0: "Proceso no problemático", 1: "Proceso problemático"}
+p_meaning = {0: "Proceso normal", 1: "Proceso problemático"}
 db_params = {
     'dbname': 'postgres',
     'user': 'postgres',
@@ -19,7 +19,6 @@ conn = psycopg2.connect(**db_params)
 
 app = FastAPI()
 
-# Uso_CPU (-1.7337, 1.7314), Uso_Memoria (-1.7312, 1.7348), Numero_Hilos (-1.6983, 1.6939), Tiempo_Ejecucion (-1.7324, 1.7329), Numero_Errores (-2.2367, 6.2568), Aplicación (False, True), Servicio (False, True), Sistema (False, True)
 @app.post("/predict")
 def predict(data: Pred):
     prediction = ml_model.predict([[data.Uso_CPU, data.Uso_Memoria, data.Numero_Hilos, data.Tiempo_Ejecucion, data.Numero_Errores, data.Aplicación, data.Servicio, data.Sistema]])
@@ -27,7 +26,7 @@ def predict(data: Pred):
     cur = conn.cursor()
     cur.execute(
         "INSERT INTO predictions (Uso_CPU, Uso_Memoria, Numero_Hilos, Tiempo_Ejecucion, Numero_Errores, Aplicacion, Servicio, Sistema, pred) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
-        (data.Uso_CPU, data.Uso_Memoria, data.Numero_Hilos, data.Tiempo_Ejecucion, data.Numero_Errores, data.Aplicación, data.Servicio, data.Sistema, meaning)
+        (data.Uso_CPU, data.Uso_Memoria, data.Numero_Hilos, data.Tiempo_Ejecucion, data.Numero_Errores, data.Aplicación, data.Servicio, data.Sistema, int(prediction[0]))
     )
     conn.commit()
     cur.close()
@@ -64,7 +63,7 @@ def put_item(id: int, prediction: int, data: Pred):
     meaning = p_meaning[prediction]
     cur.execute(
         "UPDATE predictions SET Uso_CPU = %s, Uso_Memoria = %s, Numero_Hilos = %s, Tiempo_Ejecucion = %s, Numero_Errores = %s, Aplicacion = %s, Servicio = %s, Sistema = %s, pred = %s WHERE id = %s",
-        (data.Uso_CPU, data.Uso_Memoria, data.Numero_Hilos, data.Tiempo_Ejecucion, data.Numero_Errores, data.Aplicación, data.Servicio, data.Sistema, meaning, id)
+        (data.Uso_CPU, data.Uso_Memoria, data.Numero_Hilos, data.Tiempo_Ejecucion, data.Numero_Errores, data.Aplicación, data.Servicio, data.Sistema, prediction, id)
     )
     conn.commit()
     cur.close()
